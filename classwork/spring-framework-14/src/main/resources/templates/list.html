@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all persons</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .persons, .persons td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>Persons:</h1>
+
+<table class="persons">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p: ${persons}">
+        <td th:text="${p.id}">1</td>
+        <td th:text="${p.name}">John Doe</td>
+        <td>
+            <a th:href="@{/edit(id=${p.id})}" href="edit.html">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/delete(id=${p.id})}" href="delete.html">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/add}" href="add.html" >Add</a>
+</body>
+</html>
