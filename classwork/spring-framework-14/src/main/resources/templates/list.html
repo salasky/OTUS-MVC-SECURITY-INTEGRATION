@@ -28,7 +28,8 @@
     <tbody>
     <tr th:each="p: ${persons}">
         <td th:text="${p.id}">1</td>
-        <td th:text="${p.name}">John Doe</td>
+        <td th:text="${p.name}">
+            John Doe</td>
         <td>
             <a th:href="@{/edit(id=${p.id})}" href="edit.html">Edit</a>
         </td>

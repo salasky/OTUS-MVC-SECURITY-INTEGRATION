@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .books {
+            border: 1px solid steelblue;
+            width: 1000px;
+            border-collapse: collapse;
+        }
+
+        .books tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+
+        .books td:last-child, td:first-child {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <a href="create_book.html" th:href="@{/create-book}"><button type="submit">Create book ...</button></a>
+</div>
+<table class="books">
+<thead>
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Author</th>
+    <th>Genre</th>
+    <th>Action</th>
+    <th>About</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="book : ${books}">
+    <td th:text="${book.bookId}">1</td>
+    <td th:text="${book.bookName}">Сказка о рыбке и рыбке</td>
+    <td th:text="${book.authorName}">А.С. Пушкин</td>
+    <td th:text="${book.genreName}">Сказка</td>
+    <td>
+        <a th:href="@{/update-book(id=${book.bookId})}" href="edit_book.html">Edit</a>
+    </td>
+    <td>
+        <a th:href="@{/find-comments(bookId=${book.bookId})}" href="comments.html">Comments</a>
+    </td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
