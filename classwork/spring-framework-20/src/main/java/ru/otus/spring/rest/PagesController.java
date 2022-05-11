@@ -1,10 +1,10 @@
 package ru.otus.spring.rest;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -21,11 +21,16 @@ public class PagesController {
     }
 
     @GetMapping("/authenticated")
-    public String authenticatedPage(Model model) {
-        UserDetails userDetails= (UserDetails) SecurityContextHolder
-                .getContext().getAuthentication().getPrincipal();
+    public String authenticatedPage() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         System.out.println(userDetails.getUsername());
-        model.addAttribute("userss",userDetails.getUsername());
         return "authenticated";
+    }
+
+    @GetMapping("/success")
+    public String successPage() {
+        return "success";
     }
 }

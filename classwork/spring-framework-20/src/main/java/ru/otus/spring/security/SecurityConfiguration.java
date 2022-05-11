@@ -7,15 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
-import java.util.Collection;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -29,29 +22,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                // По умолчанию SecurityContext хранится в сессии
+                // Это необходимо, чтобы он нигде не хранился
+                // и данные приходили каждый раз с запросом
+                //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                //.and()
+                .authorizeRequests().antMatchers("/public").permitAll()
                 .and()
-                .authorizeRequests().antMatchers("/public").anonymous()
+                .authorizeRequests().antMatchers("/authenticated", "/success").authenticated()
                 .and()
-                .authorizeRequests().antMatchers("/authenticated").authenticated()
-                .and()
-                .httpBasic();
+                // Включает Form-based аутентификацию
+                .formLogin()
+        ;
     }
 
+    @SuppressWarnings("deprecation")
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new PasswordEncoder() {
-            @Override
-            public String encode(CharSequence charSequence) {
-                return charSequence.toString();
-            }
-
-            @Override
-            public boolean matches(CharSequence charSequence, String s)  {
-                return charSequence.toString().equals(s);
-            }
-        };
+        return NoOpPasswordEncoder.getInstance();
     }
 
     @Autowired
