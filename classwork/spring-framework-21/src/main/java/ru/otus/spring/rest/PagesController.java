@@ -27,7 +27,7 @@ public class PagesController {
 
     @GetMapping("/user")
     public String userPage() {
-        //myService.onlyUser();
+        myService.onlyUser();
         return "user";
     }
 
