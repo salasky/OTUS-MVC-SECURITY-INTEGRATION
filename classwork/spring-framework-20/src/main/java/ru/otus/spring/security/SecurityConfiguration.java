@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -27,12 +28,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // и данные приходили каждый раз с запросом
                 //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 //.and()
-                .authorizeRequests().antMatchers("/public").permitAll()
+                .authorizeRequests().antMatchers("/public").anonymous()
+                .and()
+                .anonymous()
+                .authorities("ROLE_ANONYMOUS")
+                .principal("Anonym")
                 .and()
                 .authorizeRequests().antMatchers("/authenticated", "/success").authenticated()
                 .and()
+                .rememberMe()
+                .key("myAppKey")
+                .tokenValiditySeconds(600)
+                .and()
                 // Включает Form-based аутентификацию
                 .formLogin()
+
+
+
+
+
+
+
+
         ;
     }
 

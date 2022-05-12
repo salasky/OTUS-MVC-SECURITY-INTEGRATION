@@ -17,6 +17,10 @@ public class PagesController {
 
     @GetMapping("/public")
     public String publicPage() {
+
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        System.out.println(authentication.getPrincipal());
         return "public";
     }
 
