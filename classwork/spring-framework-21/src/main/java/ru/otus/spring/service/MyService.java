@@ -7,10 +7,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class MyService {
 
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    @Secured({"ROLE_USER","ROLE_USERADMIN"})
     public void onlyUser() {
         System.out.println("USSSEEESSR");
     }
 
-    public void onlyAdmin() {}
+    @Secured({"ROLE_USERADMIN"})
+    public void onlyAdmin() {
+        System.out.println("ADMINNN");
+    }
 }

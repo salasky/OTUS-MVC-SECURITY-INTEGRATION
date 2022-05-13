@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.otus.spring.service.MyService;
 
+
 @Controller
 public class PagesController {
 
@@ -33,7 +34,7 @@ public class PagesController {
 
     @GetMapping("/admin")
     public String adminPage() {
-       myService.onlyAdmin();
+        myService.onlyAdmin();
         return "admin";
     }
 
