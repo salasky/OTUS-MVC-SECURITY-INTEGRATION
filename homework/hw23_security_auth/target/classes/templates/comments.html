@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .comments {
+            border: 1px solid steelblue;
+            width: 1000px;
+            border-collapse: collapse;
+        }
+
+        .comments tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+
+        .comments td:last-child, td:first-child {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <a href="books.html" th:href="@{/}"><button type="button"><<</button></a>
+    <a href="create_comment.html" th:href="@{/create-comment(bookId=${bookId})}"><button type="button">Create comment ...</button></a>
+</div>
+<table class="comments">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Comment</th>
+        <th>User</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="comment : ${comments}">
+        <td th:text="${comment.id}">1</td>
+        <td th:text="${comment.title}">Титул</td>
+        <td th:text="${comment.body}">Комментарий</td>
+        <td th:text="${comment.userName}">Пользователь0</td>
+        <td>
+            <a th:href="@{/delete-comment(id=${comment.id}, bookId=${bookId})}" href="comments.html">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
