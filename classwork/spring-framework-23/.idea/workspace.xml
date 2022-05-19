@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fde032ef-6632-4b16-a393-898571ae026a" name="Changes" comment="" />
+    <list default="true" id="fde032ef-6632-4b16-a393-898571ae026a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/otus/spring/BatchConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/otus/spring/BatchConfig.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,10 +34,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../spring-framework-22" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/headFirstJava-832795fba05de66f57ef69e1b432fccb2a5b2dbe/otus/springFramework/spring-framework-12" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -53,6 +61,7 @@
       <option name="presentableId" value="Default" />
       <updated>1652635570443</updated>
       <workItem from="1652635572649" duration="154000" />
+      <workItem from="1652713451705" duration="7043000" />
     </task>
     <servers />
   </component>
