@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments of book</title>
+</head>
+<body>
+<div>
+    <p>
+    <h2>Authors of book</h2>
+    <p>
+        <a href="#" th:href="@{/book(id=${idBook})}">Go to book</a>
+    </p>
+    <table align="centre" width="40%">
+        <tr>
+            <th>Comment id</th><th>Comment value</th>
+        </tr>
+        <tr th:each="authorV : ${authorsBook}">
+            <form action="#" th:action="@{/deleteAuthorInBook(idBook=${idBook})}" th:object="${authorV}" method="post">
+                <td><input type="text" th:name="id" th:value="*{id}"/></td>
+                <td><input type="text" th:name="firstName" th:value="*{firstName}"/></td>
+                <td><input type="text" th:name="secondName" th:value="*{secondName}"/></td>
+                <td><input type="submit" value="Delete author"/></td>
+            </form>
+        </tr>
+    </table>
+    </p>
+    <p>
+        <form action="#" th:action="@{/addAuthorInBook(idBook=${idBook})}" th:object="${author}" method="post">
+        <label for="author-input">Author: </label>
+        <select id="author-input" th:name="author">
+            <option th:each="authorV : ${authors}"
+                    th:value="${{authorV}}"
+                    th:text="${authorV.firstName} +' : '+ ${authorV.secondName}">Test author</option>
+            <p><input type="submit" value="Add author"/></p>
+        </form>
+        </select>
+    </p>
+</div>
+</body>
+</html>

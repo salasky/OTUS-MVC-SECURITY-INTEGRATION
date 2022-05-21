@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Author</title>
+</head>
+<body>
+    <h1>Author:</h1>
+    <form action="/#" th:action="@{/deleteAuthor(id=${author.id})}" method="post">
+        <input type="submit" value="Delete author" />
+    </form>
+    <form action="#" name="author" th:action="@{/editAuthor}" th:object="${author}" method="post">
+        <p>Author id: <input type="text" th:field="*{id}"/></p>
+        <p>Author first name: <input type="text" th:field="*{firstName}" /></p>
+        <p>Author second name: <input type="text" th:field="*{secondName}" /></p>
+        <datalist>
+        </datalist>
+        <p><input type="submit" value="Edit" /></p>
+    </form>
+</body>
+</html>

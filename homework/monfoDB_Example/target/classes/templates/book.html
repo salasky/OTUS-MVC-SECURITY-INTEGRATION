@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+</head>
+<body>
+<h1>BOOK:</h1>
+<div>
+    <p><a href="#" th:href="@{/books}">List of book</a></p>
+</div>
+<div>
+    <form action="/deleteBook" th:action="@{/deleteBook(id=${book.id})}" method="post">
+        <input type="submit" value="Delete book" />
+    </form>
+</div>
+<div>
+    <form action="#" th:action="@{/editBook}" th:object="${book}" method="post">
+        <p>Book id: <input type="text" th:field="*{id}"/></p>
+        <p>Book name: <input type="text" th:field="*{name}" /></p>
+        <p>Book content: <input type="text" th:field="*{content}" /></p>
+        <p>Book description: <input type="text" th:field="*{description}" /></p>
+    <div id = "div">
+        <h2>Genre</h2>
+        <p><a href="#" th:href="@{/genres}">Genres</a></p>
+        <p>
+            <label for="genre-input">Genre: </label>
+            <select id="genre-input" th:field="*{genre}">
+                <option th:each="genre : ${genres}"
+                        th:value="${{genre}}"
+                        th:text="${genre.genre}">Test genre</option>
+            </select>
+        </p>
+        <fieldset>
+            <h2>List of author</h2>
+            <p><a href="#" th:href="@{/authorsBook(id=${book.id})}">Authors of book</a></p>
+            <table align="centre" width="40%">
+                <tr>
+                    <th>Author id</th><th>Author first name</th><th>Author second name</th>
+                </tr>
+                <tr th:each="author, itemStat : *{authors}">
+                    <td><input type="text" th:field="*{authors[__${itemStat.index}__].id}"/></td>
+                    <td><input type="text" th:field="*{authors[__${itemStat.index}__].firstName}"/></td>
+                    <td><input type="text" th:field="*{authors[__${itemStat.index}__].secondName}"/></td>
+                </tr>
+            </table>
+            <h2>List of comment</h2>
+            <p><a href="#" th:href="@{/commentsBook(id=${book.id})}">Comments of book</a></p>
+            <table align="centre" width="40%">
+                <tr>
+                    <th>Comment id</th><th>Comment</th>
+                </tr>
+                <tr th:each="comment, itemStat : *{comments}">
+                    <td><input type="text" th:field="*{comments[__${itemStat.index}__].id}"/></td>
+                    <td><input type="text" th:field="*{comments[__${itemStat.index}__].comment}"/></td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+        <p><input type="submit" value="Save"/></p>
+    </form>
+</div>
+</body>
+</html>

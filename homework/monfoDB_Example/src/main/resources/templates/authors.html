@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+</head>
+<body>
+<div>
+    <p>
+    <h2>Authors</h2>
+    <p>
+        <a href="#" th:href="@{/books}">Go to list of book</a>
+    </p>
+    <p>
+        <div>
+            <form action="#" th:action="@{/createAuthor}" th:object="${author}" method="post">
+                <p>Author firstName: <input type="text" th:name="firstName" /></p>
+                <p>Author secondName: <input type="text" th:name="secondName" /></p>
+                <p><input type="submit" value="Add author"/></p>
+            </form>
+        </div>
+    </p>
+    <table align="centre" width="40%">
+        <tr>
+            <th>Edit author</th><th>Author id</th><th>Author firstName</th><th>Author secondName</th>
+        </tr>
+        <tr th:each="authorV : ${authors}">
+            <form action="#" th:action="@{/deleteAuthor}" th:object="${authorV}" method="post">
+                <td><a href="#" th:text="${authorV.id}" th:href="@{/author(id=${authorV.id})}">Test edit author</a></td>
+                <td><input type="text" th:name="id" th:value="*{id}"/></td>
+                <td><input type="text" th:name="firstName" th:value="*{firstName}"/></td>
+                <td><input type="text" th:name="secondName" th:value="*{secondName}"/></td>
+                <td><input type="submit" value="Delete author"/></td>
+            </form>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

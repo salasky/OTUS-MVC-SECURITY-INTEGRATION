@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments of book</title>
+</head>
+<body>
+    <div>
+        <p>
+        <h2>Comments of book</h2>
+        <p>
+            <a href="#" th:href="@{/book(id=${idBook})}">Go to book</a>
+        </p>
+        <table align="centre" width="40%">
+            <tr>
+                <th>Comment id</th><th>Comment value</th>
+            </tr>
+            <tr th:each="commentV : ${comments}">
+                <form action="#" th:action="@{/deleteComment(idBook=${idBook})}" th:object="${commentV}" method="post">
+                <td><input type="text" th:name="id" th:value="*{id}"/></td>
+                <td><input type="text" th:name="comment" th:value="*{comment}"/></td>
+                <td>
+                    <input type="submit" value="Delete comment"/>
+                </td>
+                </form>
+            </tr>
+        </table>
+        </p>
+        <p>
+        <form action="#" th:action="@{/addComment(idBook=${idBook})}" th:object="${comment}" method="post">
+        <p>Comment: <input type="text" th:name="comment" th:field="*{comment}"/></p>
+        <p><input type="submit" value="Add comment"/></p>
+        </form>
+        </p>
+    </div>
+</body>
+</html>

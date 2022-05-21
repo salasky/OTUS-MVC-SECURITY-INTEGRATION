@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Genres</title>
+</head>
+<body>
+<div>
+    <p>
+    <h2>Genres</h2>
+    <p>
+        <a href="#" th:href="@{/books}">Go to list of book</a>
+    </p>
+    <p>
+        <div>
+            <form action="#" th:action="@{/createGenre}" th:object="${genre}" method="post">
+            <p>Genre: <input type="text" th:name="genre" /></p>
+            <p><input type="submit" value="Add genre"/></p>
+            </form>
+        </div>
+    </p>
+    <table align="centre" width="40%">
+        <tr>
+            <th>Edit genre</th><th>Genre id</th><th>Genre</th>
+        </tr>
+        <tr th:each="genreV : ${genres}">
+            <form action="#" th:action="@{/deleteGenre}" th:object="${genreV}" method="post">
+                <td><a href="#" th:text="${genreV.id}" th:href="@{/genre(id=${genreV.id})}">Test edit genre</a></td>
+                <td><input type="text" th:name="id" th:value="*{id}"/></td>
+                <td><input type="text" th:name="genre" th:value="*{genre}"/></td>
+                <td><input type="submit" value="Delete genre"/></td>
+            </form>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
