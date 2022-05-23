@@ -9,6 +9,8 @@ import java.util.Collection;
 public interface UpperService {
 
     @SuppressWarnings("UnresolvedMessageChannel")
-    @Gateway(requestChannel = "upper.input")
+    @Gateway(requestChannel = "upperr.input")
     Collection<String> upperStrings(Collection<String> str);
 }
+
+

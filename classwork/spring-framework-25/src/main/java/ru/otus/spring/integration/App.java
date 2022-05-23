@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.QueueChannel;
-import org.springframework.integration.dsl.channel.MessageChannels;
+import org.springframework.integration.dsl.MessageChannels;
 import org.springframework.messaging.PollableChannel;
 import org.springframework.messaging.support.MessageBuilder;
 
@@ -41,9 +41,10 @@ public class App {
         Thread.sleep(100000);
     }
 
+    //P2P канал c буфферизацией
     @Bean
     public PollableChannel channel1() {
-        return new QueueChannel(100);
+        return MessageChannels.queue(100).get();
     }
 
     @Bean

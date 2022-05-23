@@ -6,6 +6,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.dsl.IntegrationFlow;
+import org.springframework.integration.dsl.MessageChannels;
 
 import java.util.Arrays;
 
@@ -24,9 +25,12 @@ public class App {
     }
 
     @Bean
-    public IntegrationFlow upper() {
+    public IntegrationFlow upperr() {
         return f -> f
+
                 .split()
+                .channel(MessageChannels.direct())
+                .log()
                 .<String, String>transform(String::toUpperCase)
                 .aggregate();
     }

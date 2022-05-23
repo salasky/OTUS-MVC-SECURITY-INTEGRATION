@@ -4,11 +4,13 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.support.ErrorMessage;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.messaging.support.MessageBuilder;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -21,7 +23,7 @@ public class MessagesTest {
     @Test
     public void testCreateSimpleGenericMessage() {
         // TODO: create message with the "Hello" payload
-        Message<String> message = null;
+        Message<String> message = MessageBuilder.withPayload("Hello").build();
 
         assertNotNull(message);
         assertNotNull(message.getPayload());
@@ -31,8 +33,8 @@ public class MessagesTest {
     @Test
     public void testCreateGenericMessage() {
         // TODO: create message with the User payload
-        Message<User> message = null;
-
+        Message<User> message =new GenericMessage<User>(new User("John", 23));
+        //MessageBuilder.withPayload(new User("John", 23)).build();
         assertNotNull(message);
         assertNotNull(message.getPayload());
         assertEquals(new User("John", 23), message.getPayload());
@@ -41,25 +43,18 @@ public class MessagesTest {
     @Test
     public void testGenericMessageWithHeaders() {
         // TODO: create message with the "Hello" payload, and "to" header
-        Message<String> message = null;
 
+        Message<String> message = MessageBuilder.withPayload("Hello")
+                .setHeader("to", "World").build();
         assertNotNull(message);
         assertEquals("Hello", message.getPayload());
         assertEquals("World", message.getHeaders().get("to", String.class));
     }
 
-    @Test
-    public void testGenericMessageWithMessageHeaders() {
-        Message<String> message = null;
-
-        assertNotNull(message);
-        assertEquals("Hello", message.getPayload());
-        assertEquals("World", message.getHeaders().get("to", String.class));
-    }
 
     @Test
     public void testErrorMessage() {
-        Message errorMessage = null;
+        Message errorMessage = MessageBuilder.withPayload(new NullPointerException()).build();
 
         assertNotNull(errorMessage);
         assertEquals(ErrorMessage.class, errorMessage.getClass());
