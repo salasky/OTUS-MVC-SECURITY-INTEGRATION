@@ -7,19 +7,18 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.integration.annotation.IntegrationComponentScan;
+import org.springframework.integration.annotation.Router;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.PublishSubscribeChannel;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
+import org.springframework.integration.dsl.MessageChannels;
 import org.springframework.integration.dsl.Pollers;
-import org.springframework.integration.dsl.channel.DirectChannelSpec;
-import org.springframework.integration.dsl.channel.MessageChannels;
 import org.springframework.integration.scheduling.PollerMetadata;
 import ru.otus.spring.integration.domain.Food;
 import ru.otus.spring.integration.domain.OrderItem;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -53,12 +52,18 @@ public class App {
     public IntegrationFlow cafeFlow() {
         return IntegrationFlows.from("itemsChannel")
                 .split()
+                .transform(
+                        (OrderItem s)->s.getItemName().replace("water","Vine!")
+                )
                 .handle("kitchenService", "cook")
                 // TODO*: add router and subflows to process iced and usual items
                 .aggregate()
                 .channel("foodChannel")
                 .get();
     }
+
+
+
 
     public static void main(String[] args) throws Exception {
         AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(App.class);

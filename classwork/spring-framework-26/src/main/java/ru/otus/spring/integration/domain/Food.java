@@ -3,7 +3,7 @@ package ru.otus.spring.integration.domain;
 
 public class Food {
 
-    private final String name;
+    private String name;
 
     public Food(String name) {
         this.name = name;
@@ -12,4 +12,9 @@ public class Food {
     public String getName() {
         return name;
     }
+    public void setName(String name){
+        this.name=name;
+    }
+
+
 }
