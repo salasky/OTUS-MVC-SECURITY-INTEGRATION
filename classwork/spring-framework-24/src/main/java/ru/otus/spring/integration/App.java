@@ -5,8 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.annotation.IntegrationComponentScan;
+import org.springframework.integration.annotation.Poller;
+import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.MessageChannels;
+import org.springframework.integration.dsl.Pollers;
+import org.springframework.integration.scheduling.PollerMetadata;
 
 import java.util.Arrays;
 
@@ -28,10 +32,23 @@ public class App {
     public IntegrationFlow upperr() {
         return f -> f
 
-                .split()
-                .channel(MessageChannels.direct())
                 .log()
-                .<String, String>transform(String::toUpperCase)
+                .split()
+                .log()
+                //.channel("chanelDir")
+                .channel(MessageChannels.queue())
                 .aggregate();
     }
+
+
+    @Bean(name=PollerMetadata.DEFAULT_POLLER)
+    public PollerMetadata defPoller(){
+        return Pollers.fixedDelay(3000).maxMessagesPerPoll(1).get();
+    }
+
+    @Bean
+    public DirectChannel channelDir(){
+        return MessageChannels.direct().get();
+    }
+
 }
