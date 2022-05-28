@@ -7,7 +7,7 @@ import java.util.Random;
 
 @Configuration
 public class HealthIndicator implements org.springframework.boot.actuate.health.HealthIndicator {
-
+    //рандомный healthindicator
     @Override
     public Health health() {
        while (true) {
