@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/soap-client/gs-consuming-web-service.iml" filepath="$PROJECT_DIR$/soap-client/gs-consuming-web-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/soap-server/gs-producing-web-service.iml" filepath="$PROJECT_DIR$/soap-server/gs-producing-web-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spring-framework-28.iml" filepath="$PROJECT_DIR$/.idea/spring-framework-28.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rest-template/spring-framework-28-rest-template.iml" filepath="$PROJECT_DIR$/rest-template/spring-framework-28-rest-template.iml" />
+    </modules>
+  </component>
+</project>
