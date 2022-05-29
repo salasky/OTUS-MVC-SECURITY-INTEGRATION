@@ -1,0 +1,16 @@
+logging:
+  level:
+    root: info
+  pattern:
+    file: '%d{yyyy-MM-dd HH:mm:ss} %-5level - %msg%n'
+  file: 'logs/books_app_log.log'
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - metrics
+          - health
+          - logfile
+          - hystrix.stream
